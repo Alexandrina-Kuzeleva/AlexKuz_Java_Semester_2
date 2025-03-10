@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="sedan" class="com.example.AlexKuz.Sedan">
+        <constructor-arg index="0" value="Mitsubishi Pajero Sport"/>          
+        <constructor-arg index="1" value="178"/>            
+        <constructor-arg index="2" value="Дизель"/>         
+        <constructor-arg index="3" value="2015"/>          
+        <constructor-arg index="4" value="216441"/>          
+        <constructor-arg index="5" value="Механическая"/>        
+        <constructor-arg index="6" value="2.5"/>            
+    </bean>
+
+    <bean id="sedan2" class="com.example.AlexKuz.Sedan">
+        <constructor-arg index="0" value="Volkswagen Jetta"/>          
+        <constructor-arg index="1" value="122"/>            
+        <constructor-arg index="2" value="Бензин"/>         
+        <constructor-arg index="3" value="2014"/>          
+        <constructor-arg index="4" value="122248"/>          
+        <constructor-arg index="5" value="Робот"/>        
+        <constructor-arg index="6" value="1.6"/>            
+    </bean>
+
+    <bean id="suv" class="com.example.AlexKuz.SUV">
+        <constructor-arg index="0" value="Tesla Model X"/>         
+        <constructor-arg index="1" value="676"/>            
+        <constructor-arg index="2" value="Электрокар"/>      
+        <constructor-arg index="3" value="2022"/>          
+        <constructor-arg index="4" value="12022"/>          
+        <constructor-arg index="5" value="Автоматическа"/>     
+        <constructor-arg index="6" value="0.0"/>            
+    </bean>
+
+    <bean id="sedanDisplayer" class="com.example.AlexKuz.CarDisplayer">
+        <constructor-arg ref="sedan"/>
+    </bean>
+
+    <bean id="sedan2Displayer" class="com.example.AlexKuz.CarDisplayer">
+        <constructor-arg ref="sedan2"/>
+    </bean>
+
+    <bean id="suvDisplayer" class="com.example.AlexKuz.CarDisplayer">
+        <constructor-arg ref="suv"/>
+    </bean>
+
+</beans>
