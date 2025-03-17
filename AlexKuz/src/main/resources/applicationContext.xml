@@ -4,47 +4,62 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <bean id="sedan" class="com.example.AlexKuz.Sedan">
-        <constructor-arg index="0" value="Mitsubishi Pajero Sport"/>          
-        <constructor-arg index="1" value="178"/>            
-        <constructor-arg index="2" value="Дизель"/>         
-        <constructor-arg index="3" value="2015"/>          
-        <constructor-arg index="4" value="216441"/>          
-        <constructor-arg index="5" value="Механическая"/>        
-        <constructor-arg index="6" value="2.5"/>            
+    <!-- Бин седана со scope singleton -->
+    <bean id="sedan" class="com.example.AlexKuz.Sedan" scope="singleton"
+          init-method="initializeCar" destroy-method="destroyCar">
+        <constructor-arg index="0" value="Mitsubishi Pajero Sport"/>
+        <constructor-arg index="1" value="178"/>
+        <constructor-arg index="2" value="Дизель"/>
+        <constructor-arg index="3" value="2015"/>
+        <constructor-arg index="4" value="216441"/>
+        <constructor-arg index="5" value="Механическая"/>
+        <constructor-arg index="6" value="2.5"/>
+        <property name="color" value="Белый"/>
+        <property name="price" value="2500000"/>
     </bean>
 
-    <bean id="sedan2" class="com.example.AlexKuz.Sedan">
-        <constructor-arg index="0" value="Volkswagen Jetta"/>          
-        <constructor-arg index="1" value="122"/>            
-        <constructor-arg index="2" value="Бензин"/>         
-        <constructor-arg index="3" value="2014"/>          
-        <constructor-arg index="4" value="122248"/>          
-        <constructor-arg index="5" value="Робот"/>        
-        <constructor-arg index="6" value="1.6"/>            
+    <!-- Бин седана со scope prototype -->
+    <bean id="sedan2" class="com.example.AlexKuz.Sedan" scope="prototype"
+          init-method="initializeCar" destroy-method="destroyCar">
+        <constructor-arg index="0" value="Volkswagen Jetta"/>
+        <constructor-arg index="1" value="122"/>
+        <constructor-arg index="2" value="Бензин"/>
+        <constructor-arg index="3" value="2014"/>
+        <constructor-arg index="4" value="122248"/>
+        <constructor-arg index="5" value="Робот"/>
+        <constructor-arg index="6" value="1.6"/>
+        <property name="color" value="Синий"/>
+        <property name="price" value="1800000"/>
     </bean>
 
-    <bean id="suv" class="com.example.AlexKuz.SUV">
-        <constructor-arg index="0" value="Tesla Model X"/>         
-        <constructor-arg index="1" value="676"/>            
-        <constructor-arg index="2" value="Электрокар"/>      
-        <constructor-arg index="3" value="2022"/>          
-        <constructor-arg index="4" value="12022"/>          
-        <constructor-arg index="5" value="Автоматическа"/>     
-        <constructor-arg index="6" value="0.0"/>            
+    <!-- Бин SUV со scope singleton -->
+    <bean id="suv" class="com.example.AlexKuz.SUV" scope="singleton"
+          init-method="initializeCar" destroy-method="destroyCar">
+        <constructor-arg index="0" value="Tesla Model X"/>
+        <constructor-arg index="1" value="676"/>
+        <constructor-arg index="2" value="Электрокар"/>
+        <constructor-arg index="3" value="2022"/>
+        <constructor-arg index="4" value="12022"/>
+        <constructor-arg index="5" value="Автоматическая"/>
+        <constructor-arg index="6" value="0.0"/>
+        <property name="color" value="Черный"/>
+        <property name="price" value="8500000"/>
     </bean>
 
-    <bean id="sedanDisplayer" class="com.example.AlexKuz.CarDisplayer">
-        <constructor-arg ref="sedan"/>
+    <!-- Displayer бины с разными scope и форматами -->
+    <bean id="sedanDisplayer" class="com.example.AlexKuz.CarDisplayer" scope="singleton"
+          init-method="initialize" destroy-method="cleanup">
+        <property name="displayFormat" value="short"/>
     </bean>
 
-    <bean id="sedan2Displayer" class="com.example.AlexKuz.CarDisplayer">
-        <constructor-arg ref="sedan2"/>
+    <bean id="sedan2Displayer" class="com.example.AlexKuz.CarDisplayer" scope="prototype"
+          init-method="initialize" destroy-method="cleanup">
+        <property name="displayFormat" value="detailed"/>
     </bean>
 
-    <bean id="suvDisplayer" class="com.example.AlexKuz.CarDisplayer">
-        <constructor-arg ref="suv"/>
+    <bean id="suvDisplayer" class="com.example.AlexKuz.CarDisplayer" scope="singleton"
+          init-method="initialize" destroy-method="cleanup">
+        <property name="displayFormat" value="full"/>
     </bean>
 
 </beans>
