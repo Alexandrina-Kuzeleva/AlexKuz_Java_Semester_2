@@ -1,13 +1,34 @@
 package com.example.AlexKuz;
 
-public class CarDisplayer implements CarDisplay {
-    private String displayFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
-    public CarDisplayer() {
+@Component
+@Scope("singleton")
+class CarDisplayer implements CarDisplay {
+    private String displayFormat = "short";
+    
+    @Autowired
+    @Qualifier("sedan")
+    private Sedan sedan;
+    
+    @Autowired
+    @Qualifier("SUV")
+    private SUV suv;
+
+
+    @PostConstruct
+    public void initialize() {
+        System.out.println("CarDisplayer initialized with format: " + displayFormat);
     }
 
-    public void setDisplayFormat(String displayFormat) {
-        this.displayFormat = displayFormat;
+    @PreDestroy
+    public void cleanup() {
+        System.out.println("CarDisplayer cleaned up");
     }
 
     @Override
@@ -23,7 +44,7 @@ public class CarDisplayer implements CarDisplay {
             System.out.println("Тип топлива: " + car.getFuelType());
             System.out.println("Пробег: " + car.getMileage() + " км");
             System.out.println("Цвет: " + car.getColor());
-        } else { 
+        } else {
             System.out.println("Полный формат:");
             System.out.println("Марка: " + car.getBrand());
             System.out.println("Мощность: " + car.getHorsePower() + " л.с.");
@@ -37,15 +58,5 @@ public class CarDisplayer implements CarDisplay {
             System.out.println("Цена: " + car.getPrice() + " руб.");
         }
         System.out.println("-------------------");
-    }
-
-    @Override
-    public void initialize() {
-        System.out.println("CarDisplayer initialized");
-    }
-
-    @Override
-    public void cleanup() {
-        System.out.println("CarDisplayer cleaned up");
     }
 }
