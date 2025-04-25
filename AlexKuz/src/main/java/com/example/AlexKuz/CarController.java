@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class CarController {
 
@@ -14,6 +17,13 @@ public class CarController {
 
     @Autowired
     private SUV suv;
+
+    @GetMapping("/cars")
+    public String showAllCars(Model model) {
+        List<Car> cars = Arrays.asList(sedan, suv);
+        model.addAttribute("cars", cars);
+        return "carList";
+    }
 
     @GetMapping("/showSedan")
     public String showSedan(Model model) {

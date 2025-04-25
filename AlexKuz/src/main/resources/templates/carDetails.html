@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Подробности</title>
+    <title>Детали автомобиля</title>
+    <meta charset="UTF-8"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .car-details {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .car-details p {
+            margin: 10px 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Подробности</h1>
-    <div>
-        <p><strong>Брэнд:</strong> <span th:text="${car.brand}"></span></p>
+    <h1>Детали автомобиля</h1>
+    <div class="car-details">
+        <p><strong>Марка:</strong> <span th:text="${car.brand}"></span></p>
         <p><strong>Тип:</strong> <span th:text="${car.type}"></span></p>
-        <p><strong>Год:</strong> <span th:text="${car.year}"></span></p>
-        <p><strong>Лошадиные силы:</strong> <span th:text="${car.horsePower}"></span></p>
+        <p><strong>Мощность:</strong> <span th:text="${car.horsePower} + ' л.с.'"></span></p>
         <p><strong>Тип топлива:</strong> <span th:text="${car.fuelType}"></span></p>
-        <p><strong>Тип коробки:</strong> <span th:text="${car.transmission}"></span></p>
-        <p><strong>Пробег:</strong> <span th:text="${car.mileage}"></span> км</p>
+        <p><strong>Год выпуска:</strong> <span th:text="${car.year}"></span></p>
+        <p><strong>Пробег:</strong> <span th:text="${car.mileage} + ' км'"></span></p>
+        <p><strong>Коробка передач:</strong> <span th:text="${car.transmission}"></span></p>
+        <p><strong>Объем двигателя:</strong> <span th:text="${car.engineVolume} + ' л'"></span></p>
         <p><strong>Цвет:</strong> <span th:text="${car.color}"></span></p>
-        <p><strong>Ценна:</strong> <span th:text="${car.price}"></span> руб.</p>
+        <p><strong>Цена:</strong> <span th:text="${car.price} + ' руб.'"></span></p>
     </div>
+    <br/>
+    <a href="/cars">Вернуться к списку автомобилей</a>
 </body>
 </html>
