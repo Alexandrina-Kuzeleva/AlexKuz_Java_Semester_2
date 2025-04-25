@@ -4,37 +4,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class CarController {
 
     @Autowired
-    private Sedan sedan;
-
-    @Autowired
-    private SUV suv;
+    private CarService carService;
 
     @GetMapping("/cars")
     public String showAllCars(Model model) {
-        List<Car> cars = Arrays.asList(sedan, suv);
-        model.addAttribute("cars", cars);
+        model.addAttribute("cars", carService.getAllCars());
         return "carList";
     }
 
-    @GetMapping("/showSedan")
-    public String showSedan(Model model) {
-        model.addAttribute("car", sedan);
+    @GetMapping("/showCar")
+    public String showCar(@RequestParam("index") int index, Model model) {
+        Car car = carService.getCarByIndex(index);
+        if (car == null) {
+            model.addAttribute("error", "Автомобиль не найден!");
+            return "carDetails";
+        }
+        model.addAttribute("car", car);
         return "carDetails";
     }
 
-    @GetMapping("/showSUV")
-    public String showSUV(Model model) {
-        model.addAttribute("car", suv);
-        return "carDetails";
+    @GetMapping("/addCar")
+    public String showAddCarForm(Model model) {
+        model.addAttribute("carForm", new CarForm());
+        return "addCar";
+    }
+
+    @PostMapping("/addCar")
+    public String addCar(@ModelAttribute("carForm") CarForm carForm, Model model) {
+        try {
+            Car car;
+            if ("Sedan".equals(carForm.getType())) {
+                car = new Sedan();
+            } else {
+                car = new SUV();
+            }
+            car.setBrand(carForm.getBrand());
+            car.setHorsePower(carForm.getHorsePower());
+            car.setFuelType(carForm.getFuelType());
+            car.setYear(carForm.getYear());
+            car.setMileage(carForm.getMileage());
+            car.setTransmission(carForm.getTransmission());
+            car.setEngineVolume(carForm.getEngineVolume());
+            car.setColor(carForm.getColor());
+            car.setPrice(carForm.getPrice());
+
+            carService.addCar(car);
+            return "redirect:/cars";
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка при добавлении автомобиля: " + e.getMessage());
+            return "addCar";
+        }
     }
 
     @GetMapping("/calculate")

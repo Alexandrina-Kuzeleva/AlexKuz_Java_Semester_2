@@ -35,6 +35,7 @@
 </head>
 <body>
     <h1>Список автомобилей</h1>
+    <p><a href="/addCar">Добавить новый автомобиль</a></p>
     <table>
         <thead>
             <tr>
@@ -47,14 +48,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="car : ${cars}">
+            <tr th:each="car, iterStat : ${cars}">
                 <td th:text="${car.brand}"></td>
                 <td th:text="${car.type}"></td>
                 <td th:text="${car.year}"></td>
                 <td th:text="${car.color}"></td>
                 <td th:text="${car.price}"></td>
                 <td>
-                    <a th:href="@{${car.type == 'Седан' ? '/showSedan' : '/showSUV'}}">Подробнее</a>
+                    <a th:href="@{/showCar(index=${iterStat.index})}">Подробнее</a>
                 </td>
             </tr>
         </tbody>

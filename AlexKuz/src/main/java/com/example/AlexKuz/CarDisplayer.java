@@ -1,7 +1,5 @@
 package com.example.AlexKuz;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
@@ -11,15 +9,6 @@ import jakarta.annotation.PreDestroy;
 @Scope("singleton")
 class CarDisplayer implements CarDisplay {
     private String displayFormat = "short";
-    
-    @Autowired
-    @Qualifier("sedan")
-    private Sedan sedan;
-    
-    @Autowired
-    @Qualifier("SUV")
-    private SUV suv;
-
 
     @PostConstruct
     public void initialize() {

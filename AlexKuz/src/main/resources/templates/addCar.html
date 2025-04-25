@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить автомобиль</title>
+    <meta charset="UTF-8"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .form-container {
+            max-width: 600px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .error {
+            color: red;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добавить автомобиль</h1>
+    <div class="form-container">
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+        <form th:action="@{/addCar}" th:object="${carForm}" method="post">
+            <div class="form-group">
+                <label for="type">Тип автомобиля:</label>
+                <select id="type" th:field="*{type}" required>
+                    <option value="Sedan">Седан</option>
+                    <option value="SUV">Внедорожник</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand">Марка:</label>
+                <input type="text" id="brand" th:field="*{brand}" required/>
+            </div>
+            <div class="form-group">
+                <label for="horsePower">Мощность (л.с.):</label>
+                <input type="number" id="horsePower" th:field="*{horsePower}" required/>
+            </div>
+            <div class="form-group">
+                <label for="fuelType">Тип топлива:</label>
+                <input type="text" id="fuelType" th:field="*{fuelType}" required/>
+            </div>
+            <div class="form-group">
+                <label for="year">Год выпуска:</label>
+                <input type="number" id="year" th:field="*{year}" required/>
+            </div>
+            <div class="form-group">
+                <label for="mileage">Пробег (км):</label>
+                <input type="number" id="mileage" th:field="*{mileage}" required/>
+            </div>
+            <div class="form-group">
+                <label for="transmission">Коробка передач:</label>
+                <input type="text" id="transmission" th:field="*{transmission}" required/>
+            </div>
+            <div class="form-group">
+                <label for="engineVolume">Объем двигателя (л):</label>
+                <input type="number" step="0.1" id="engineVolume" th:field="*{engineVolume}" required/>
+            </div>
+            <div class="form-group">
+                <label for="color">Цвет:</label>
+                <input type="text" id="color" th:field="*{color}" required/>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена (руб.):</label>
+                <input type="number" step="0.01" id="price" th:field="*{price}" required/>
+            </div>
+            <button type="submit">Добавить автомобиль</button>
+        </form>
+    </div>
+    <br/>
+    <a href="/cars">Вернуться к списку автомобилей</a>
+</body>
+</html>
