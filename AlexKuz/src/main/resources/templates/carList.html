@@ -27,9 +27,24 @@
         a {
             color: #0066cc;
             text-decoration: none;
+            margin-right: 10px;
         }
         a:hover {
             text-decoration: underline;
+        }
+        .delete-form {
+            display: inline;
+        }
+        .delete-button {
+            background-color: #cc0000;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #a30000;
         }
     </style>
 </head>
@@ -56,6 +71,11 @@
                 <td th:text="${car.price}"></td>
                 <td>
                     <a th:href="@{/showCar(index=${iterStat.index})}">Подробнее</a>
+                    <a th:href="@{/editCar(index=${iterStat.index})}">Редактировать</a>
+                    <form th:action="@{/cars/{index}(index=${iterStat.index})}" method="post" class="delete-form">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button type="submit" class="delete-button">Удалить</button>
+                    </form>
                 </td>
             </tr>
         </tbody>
